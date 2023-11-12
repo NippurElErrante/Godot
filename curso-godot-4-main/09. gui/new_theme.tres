@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b4j7o3kxrjkbs"]
+
+[ext_resource type="FontFile" uid="uid://dcl7ycyotjlub" path="res://09. gui/fonts/Super Mario Bros. 2.ttf" id="1_0qh52"]
+
+[resource]
+default_font = ExtResource("1_0qh52")
+default_font_size = 8
+Button/fonts/font = ExtResource("1_0qh52")

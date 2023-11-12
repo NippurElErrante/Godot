@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnsudriy14n47"]
+
+[ext_resource type="Theme" uid="uid://b4j7o3kxrjkbs" path="res://09. gui/new_theme.tres" id="1_b76y8"]
+[ext_resource type="Texture2D" uid="uid://b5iq2r2hhfcny" path="res://09. gui/sprites/ControlBtn.png" id="2_swuyf"]
+[ext_resource type="Texture2D" uid="uid://ukcvi4getjwp" path="res://09. gui/sprites/PlayBtn.png" id="3_ucqhu"]
+
+[node name="Control" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_b76y8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 20.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Puntos: "
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "00000"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -50.0
+offset_right = 80.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -39.0
+offset_right = 56.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+texture = ExtResource("2_swuyf")
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+text = "Botón 1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_swuyf")
+
+[node name="LinkButton" type="LinkButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Botón 2"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("2_swuyf")
+stretch_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Panel/VBoxContainer/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+texture_normal = ExtResource("3_ucqhu")
+
+[node name="HSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 106.0
+offset_bottom = 20.0

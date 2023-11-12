@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbs1o87bcr57t"]
+
+[ext_resource type="Script" path="res://06. senales/scripts/player.gd" id="1_ax61o"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ax61o")

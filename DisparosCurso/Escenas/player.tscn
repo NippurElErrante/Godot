@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://2ixspb63s5kv"]
+
+[ext_resource type="Script" path="res://Escenas/Player.gd" id="1_y6kun"]
+[ext_resource type="Texture2D" uid="uid://dgcw13m7o5oh0" path="res://icon.svg" id="2_15bf8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7mi7"]
+size = Vector2(123, 122)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu228"]
+bg_color = Color(0.913725, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nf663"]
+radius = 83.672
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y6kun")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(2, 1)
+texture = ExtResource("2_15bf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1)
+shape = SubResource("RectangleShape2D_h7mi7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+limit_smoothed = true
+
+[node name="OrigenArma" type="Marker2D" parent="."]
+
+[node name="PunteroArma" type="Marker2D" parent="OrigenArma"]
+position = Vector2(-1, -91)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 82.0
+offset_top = 32.0
+offset_right = 495.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "HP:	"
+
+[node name="HPProgressBar" type="ProgressBar" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/fill = SubResource("StyleBoxFlat_gu228")
+value = 100.0
+
+[node name="DetectarEnemigo" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectarEnemigo"]
+shape = SubResource("CircleShape2D_nf663")
+
+[node name="InmunidadTimer" type="Timer" parent="DetectarEnemigo"]
+one_shot = true
+
+[connection signal="body_entered" from="DetectarEnemigo" to="." method="_on_detectar_enemigo_body_entered"]
+[connection signal="timeout" from="DetectarEnemigo/InmunidadTimer" to="." method="_on_inmunidad_timer_timeout"]

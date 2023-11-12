@@ -1,0 +1,292 @@
+[gd_scene load_steps=24 format=3 uid="uid://dcft2a6mfmep7"]
+
+[ext_resource type="Texture2D" uid="uid://ddpycycjqdm4b" path="res://10 & 11. animation/sprites/run-1/run-2.png" id="1_qud4i"]
+[ext_resource type="Texture2D" uid="uid://cpiwyidx6wypc" path="res://10 & 11. animation/sprites/run-1/run-1.png" id="2_bwpny"]
+[ext_resource type="Texture2D" uid="uid://cytatqr2s2ncw" path="res://10 & 11. animation/sprites/run-1/run-3.png" id="3_o2qlc"]
+[ext_resource type="Texture2D" uid="uid://nkn2n6k1x7a8" path="res://10 & 11. animation/sprites/run-1/run-4.png" id="4_u7i7u"]
+[ext_resource type="Texture2D" uid="uid://ct2oojjtwnul" path="res://10 & 11. animation/sprites/run-1/run-5.png" id="5_brcbh"]
+[ext_resource type="Texture2D" uid="uid://78veejuiyo0v" path="res://10 & 11. animation/sprites/run-1/run-6.png" id="6_4h6tv"]
+[ext_resource type="Texture2D" uid="uid://d3c4kx3miypk2" path="res://10 & 11. animation/sprites/run-2/spritesheet.png" id="7_8yjb4"]
+[ext_resource type="Texture2D" uid="uid://bsrikaid86n7s" path="res://10 & 11. animation/sprites/idle-1/spritesheet.png" id="8_jvlcn"]
+
+[sub_resource type="GDScript" id="GDScript_6jfi3"]
+script/source = "extends Node2D
+
+# Referencia al parametro playback del nodo AnimationTree.
+@onready var playback : AnimationNodeStateMachinePlayback = $Metodo_2/AnimationTree.get(\"parameters/playback\")
+
+func _ready() -> void:
+	$Metodo_2/AnimationPlayer.play(\"Idle\") # Para iniciar una animación con AnimationPlayer
+	$Metodo_2/AnimationPlayer.stop() # Para finalizar una animación con AnimationPlayer
+	playback.travel(\"Run\") # Para iniciar una animación con AnimationTree.
+
+
+func _process(delta) -> void:
+	state_machine() # Lo pongo en el process para que se reproduzca una vez en cada frame.
+
+
+func state_machine() -> void:
+	match playback.get_current_node():
+		\"Idle\":
+			print(\"El personaje está detenido.\")
+		\"Run\":
+			print(\"El personaje está corriendo.\")
+
+
+func demo() -> void:
+	print(\"Fin de la animación\")
+
+
+# Señal enviada por el AnimationPlayer cada vez que una animación comienza.
+func _on_animation_player_animation_started(anim_name):
+	match anim_name:
+		\"Idle\":
+			pass
+		\"Run\":
+			pass
+
+
+# Señal enviada por el AnimationPlayer cada vez que una animación termina.
+func _on_animation_player_animation_finished(anim_name):
+	match anim_name:
+		\"Idle\":
+			pass
+		\"Run\":
+			pass
+"
+
+[sub_resource type="Animation" id="Animation_ulmrg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_qud4i")]
+}
+
+[sub_resource type="Animation" id="Animation_jyv47"]
+resource_name = "Run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_bwpny"), ExtResource("1_qud4i"), ExtResource("3_o2qlc"), ExtResource("4_u7i7u"), ExtResource("5_brcbh"), ExtResource("6_4h6tv")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pgnh"]
+_data = {
+"RESET": SubResource("Animation_ulmrg"),
+"Run": SubResource("Animation_jyv47")
+}
+
+[sub_resource type="Animation" id="Animation_x472c"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_jvlcn")]
+}
+
+[sub_resource type="Animation" id="Animation_iidq1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_8yjb4")]
+}
+
+[sub_resource type="Animation" id="Animation_2r5xe"]
+resource_name = "Run"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_8yjb4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"demo"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ncb60"]
+_data = {
+"Idle": SubResource("Animation_x472c"),
+"RESET": SubResource("Animation_iidq1"),
+"Run": SubResource("Animation_2r5xe")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0yic"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7xibq"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a5wiq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bxkd4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t6vk0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_udq6m"]
+states/End/position = Vector2(680, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_y0yic")
+states/Idle/position = Vector2(500, 203)
+states/Run/node = SubResource("AnimationNodeAnimation_7xibq")
+states/Run/position = Vector2(680, 203)
+states/Start/position = Vector2(500, 100)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_a5wiq"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_bxkd4"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_t6vk0")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_wvfoc"]
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_6jfi3")
+
+[node name="Metodo_1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(160, 92)
+texture = ExtResource("1_qud4i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Metodo_1"]
+libraries = {
+"": SubResource("AnimationLibrary_2pgnh")
+}
+
+[node name="Metodo_2" type="Sprite2D" parent="."]
+position = Vector2(160, 92)
+texture = ExtResource("7_8yjb4")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Metodo_2"]
+libraries = {
+"": SubResource("AnimationLibrary_ncb60")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Metodo_2"]
+tree_root = SubResource("AnimationNodeStateMachine_udq6m")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_wvfoc")
+
+[connection signal="animation_finished" from="Metodo_2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="Metodo_2/AnimationPlayer" to="." method="_on_animation_player_animation_started"]

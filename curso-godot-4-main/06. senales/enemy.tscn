@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sm0wo4gqo5mm"]
+
+[ext_resource type="Script" path="res://06. senales/scripts/enemy.gd" id="1_j3tgs"]
+
+[node name="Enemy" type="Area3D" groups=["Enemy"]]
+script = ExtResource("1_j3tgs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

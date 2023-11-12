@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2y8b71ry0t31"]
+
+[ext_resource type="Script" path="res://new_script.gd" id="1_wchrn"]
+[ext_resource type="Script" path="res://OtroNodo.gd" id="2_ilmse"]
+[ext_resource type="Script" path="res://SOYOTRONODO.gd" id="2_rpkhr"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_wchrn")
+
+[node name="SOYOTRONODO" type="Node" parent="."]
+script = ExtResource("2_rpkhr")
+
+[node name="OtroNodo" type="Node2D" parent="."]
+position = Vector2(591, 284)
+script = ExtResource("2_ilmse")
+otroNodo = NodePath("..")

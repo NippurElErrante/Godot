@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh8o58dn2eoi6"]
+
+[ext_resource type="Texture2D" uid="uid://bppghcu6oluql" path="res://flappy-bird-assets/sprites/redbird-midflap.png" id="1_6a043"]
+[ext_resource type="Script" path="res://player.gd" id="1_vpss8"]
+[ext_resource type="Texture2D" uid="uid://bt5lyaq5cllrd" path="res://flappy-bird-assets/sprites/redbird-downflap.png" id="2_tj3sb"]
+[ext_resource type="Texture2D" uid="uid://dskyb3qc7eeiw" path="res://flappy-bird-assets/sprites/redbird-upflap.png" id="3_o5sq4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3dcf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6a043")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tj3sb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_6a043")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o5sq4")
+}],
+"loop": false,
+"name": &"flap",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdoyw"]
+radius = 12.0
+
+[node name="Player" type="RigidBody2D" groups=["Player"]]
+position = Vector2(202, 130)
+script = ExtResource("1_vpss8")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n3dcf")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sdoyw")
+
+[node name="DetectaSuelo" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectaSuelo"]
+shape = SubResource("CircleShape2D_sdoyw")
+
+[connection signal="body_entered" from="DetectaSuelo" to="." method="_on_detecta_suelo_body_entered"]

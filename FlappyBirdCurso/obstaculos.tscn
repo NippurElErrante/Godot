@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://k2y5yjv6j85w"]
+
+[ext_resource type="Script" path="res://obstaculos.gd" id="1_tehma"]
+[ext_resource type="Texture2D" uid="uid://bcdspfodcufqf" path="res://flappy-bird-assets/sprites/pipe-green.png" id="1_tlamp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfig5"]
+size = Vector2(41, 475.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kyp"]
+size = Vector2(53, 197)
+
+[node name="Obstaculos" type="Node2D"]
+position = Vector2(51, 301)
+script = ExtResource("1_tehma")
+
+[node name="Tuberia" type="Area2D" parent="."]
+position = Vector2(127, 326)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Tuberia"]
+position = Vector2(2, 82.5)
+scale = Vector2(1.07692, 1.51563)
+texture = ExtResource("1_tlamp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tuberia"]
+position = Vector2(1.5, 81.25)
+shape = SubResource("RectangleShape2D_lfig5")
+
+[node name="Tuberia2" type="Area2D" parent="."]
+position = Vector2(127, -195)
+rotation = 3.14159
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Tuberia2"]
+position = Vector2(2, 82.5)
+scale = Vector2(1.07692, 1.51563)
+texture = ExtResource("1_tlamp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tuberia2"]
+position = Vector2(1.5, 81.25)
+shape = SubResource("RectangleShape2D_lfig5")
+
+[node name="Score" type="Area2D" parent="."]
+position = Vector2(127, 57)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score"]
+position = Vector2(-1.5, 8.5)
+shape = SubResource("RectangleShape2D_r7kyp")
+
+[connection signal="body_entered" from="Tuberia" to="." method="_on_tuberia_body_entered"]
+[connection signal="body_entered" from="Tuberia2" to="." method="_on_tuberia_2_body_entered"]
+[connection signal="body_entered" from="Score" to="." method="_on_score_body_entered"]

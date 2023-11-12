@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy7i7b577vds4"]
+
+[ext_resource type="Script" path="res://07. errores/scripts/errores.gd" id="1_rlce5"]
+[ext_resource type="Script" path="res://07. errores/scripts/player.gd" id="2_newyx"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_rlce5")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_newyx")

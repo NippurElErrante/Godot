@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://drt22v4xitifk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_yoyoe"]
+[ext_resource type="Texture2D" uid="uid://56u8gn80co0k" path="res://icon.svg" id="2_xorie"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j686s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4wyub"]
+sky_material = SubResource("ProceduralSkyMaterial_j686s")
+
+[sub_resource type="Environment" id="Environment_mwuku"]
+background_mode = 2
+sky = SubResource("Sky_4wyub")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mnqec"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_yoyoe")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mwuku")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(87, 309)
+texture = ExtResource("2_xorie")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_mnqec")
+skeleton = NodePath("../Sprite2D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+current = true

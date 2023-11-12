@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://drt22v4xitifk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5we7a"]
+[ext_resource type="PackedScene" uid="uid://cc6f7hb0a663k" path="res://player/player.tscn" id="1_jke0w"]
+[ext_resource type="Texture2D" uid="uid://ctikkwbylaon8" path="res://assets/grass.png" id="1_ttach"]
+[ext_resource type="PackedScene" uid="uid://1ucrwdabfmh" path="res://HUD/hud.tscn" id="4_dao5c"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_5we7a")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_ttach")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_jke0w")]
+position = Vector2(231, 330)
+velocidad = 300
+
+[node name="ContenedorMonedas" type="Node" parent="."]
+
+[node name="InicioMarker2D" type="Marker2D" parent="."]
+position = Vector2(169, 304)
+
+[node name="JuegoTimer" type="Timer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("4_dao5c")]
+
+[connection signal="herirse" from="Player" to="." method="_on_player_herirse"]
+[connection signal="recolectar" from="Player" to="." method="_on_player_recolectar"]
+[connection signal="timeout" from="JuegoTimer" to="." method="_on_juego_timer_timeout"]
+[connection signal="inicio_juego" from="HUD" to="." method="nuevoJuego"]
